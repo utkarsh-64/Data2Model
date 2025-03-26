@@ -10,9 +10,8 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC, SVR
 import pickle
 import numpy as np
-
-
-st.set_page_config(page_title="Model Training | Train Models Instantly",page_icon=":robot_face:",layout="centered")
+import zipfile
+import io
 
 def main():
     df = st.file_uploader("Upload The Preprocessed File....", type="csv", accept_multiple_files=False)
@@ -76,16 +75,20 @@ def main():
                 trained_models[model_name] = model
 
             if trained_models:
-                for name, model in trained_models.items():
-                    st.text(f"Download The Model: {name}")
-                    st.download_button(label=f"Download {name} Model",
-                                       data=pickle.dumps(model),
-                                       file_name=f"{name}_model.pkl")
+                zip_buffer = io.BytesIO()
+                with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
+                    for name, model in trained_models.items():
+                        zip_file.writestr(f"{name}_model.pkl", pickle.dumps(model))
+                    if scaler:
+                        zip_file.writestr("scaler.pkl", pickle.dumps(scaler))
+                zip_buffer.seek(0)
+                
+                st.download_button(label="Download All Models and Scaler",
+                                   data=zip_buffer,
+                                   file_name="trained_models.zip",
+                                   mime="application/zip")
 
-                if scaler:
-                    st.download_button(label="Download Scaler",
-                                       data=pickle.dumps(scaler),
-                                       file_name="scaler.pkl")
+st.set_page_config(page_title="Model Training | Train Models Instantly",page_icon=":robot_face:",layout="centered")
 
 if __name__ == "__main__":
     main()
