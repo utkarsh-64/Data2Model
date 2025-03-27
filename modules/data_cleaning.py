@@ -196,9 +196,27 @@ def handle_column_operations(df):
         
         if st.button("Replace Values"):
             try:
-                before_count = (df[replace_col] == old_value).sum()
-                df[replace_col] = df[replace_col].replace(old_value, new_value)
-                after_count = (df[replace_col] == old_value).sum()
+                # Get column data type
+                col_type = df[replace_col].dtype
+                
+                # Convert values to match column type
+                if np.issubdtype(col_type, np.number):
+                    # Handle numerical columns
+                    old_val = float(old_value) if '.' in old_value else int(old_value)
+                    new_val = float(new_value) if '.' in new_value else int(new_value)
+                else:
+                    # Handle string columns
+                    old_val = str(old_value)
+                    new_val = str(new_value)
+                
+                # Perform replacement
+                before_count = (df[replace_col] == old_val).sum()
+                df[replace_col] = df[replace_col].replace(old_val, new_val)
+                after_count = (df[replace_col] == old_val).sum()
+                
                 st.success(f"Replaced {before_count - after_count} instances")
+                
+            except ValueError:
+                st.error("Type mismatch! Ensure replacement values match column type")
             except Exception as e:
                 st.error(f"Replacement failed: {str(e)}")
