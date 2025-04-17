@@ -45,8 +45,11 @@ const TrainModel = () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await fetch("http://localhost:5000/upload-data", {
+      const res = await fetch("https://data2model.onrender.com/upload-data", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
         credentials: "include",
         body: formData,
       });
@@ -55,7 +58,7 @@ const TrainModel = () => {
       setUploaded(true);
       toast({ title: "Upload Successful", description: data.message });
       // Fetch column info
-      const edaRes = await fetch("http://localhost:5000/eda", {
+      const edaRes = await fetch("https://data2model.onrender.com/eda", {
         method: "POST",
         credentials: "include",
       });
@@ -84,7 +87,7 @@ const TrainModel = () => {
       return;
     }
     try {
-      const res = await fetch("http://localhost:5000/train-model", {
+      const res = await fetch("https://data2model.onrender.com/train-model", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -190,7 +193,7 @@ const TrainModel = () => {
 
         {zipReady && (
           <div className="mt-4">
-            <a href={`http://localhost:5000${zipFile}`} download>
+            <a href={`https://data2model.onrender.com${zipFile}`} download>
               <Button className="w-full" variant="secondary">
                 <FileDown className="mr-2 h-4 w-4" /> Download Model ZIP
               </Button>

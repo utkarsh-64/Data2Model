@@ -26,8 +26,11 @@ const DataCleaning: React.FC<DataCleaningProps> = ({ onNext }) => {
   useEffect(() => {
     const fetchColumns = async () => {
       try {
-        const res = await fetch('http://localhost:5000/eda', {
+        const res = await fetch('https://data2model.onrender.com/eda', {
           method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
           credentials: 'include',
         });
         const data = await res.json();
@@ -49,7 +52,7 @@ const DataCleaning: React.FC<DataCleaningProps> = ({ onNext }) => {
 
   const handleApplyImputation = async (column: string, method: string, customValue?: string) => {
     try {
-      const res = await fetch('http://localhost:5000/clean-data', {
+      const res = await fetch('https://data2model.onrender.com/clean-data', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -65,7 +68,7 @@ const DataCleaning: React.FC<DataCleaningProps> = ({ onNext }) => {
 
   const handleDropColumns = async () => {
     try {
-      const res = await fetch('http://localhost:5000/drop-columns', {
+      const res = await fetch('https://data2model.onrender.com/drop-columns', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -83,7 +86,7 @@ const DataCleaning: React.FC<DataCleaningProps> = ({ onNext }) => {
 
   const handleReplaceValues = async () => {
     try {
-      const res = await fetch('http://localhost:5000/replace-values', {
+      const res = await fetch('https://data2model.onrender.com/replace-values', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
