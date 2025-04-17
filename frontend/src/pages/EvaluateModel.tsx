@@ -37,6 +37,9 @@ const EvaluateModel = () => {
     try {
       const res = await fetch('https://data2model.onrender.com/evaluate', {
         method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: formData,
         credentials: 'include',
       });

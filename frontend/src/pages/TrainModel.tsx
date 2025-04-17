@@ -47,6 +47,9 @@ const TrainModel = () => {
       formData.append("file", file);
       const res = await fetch("https://data2model.onrender.com/upload-data", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
         credentials: "include",
         body: formData,
       });
