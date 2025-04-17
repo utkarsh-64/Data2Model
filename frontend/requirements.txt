@@ -11,3 +11,4 @@ seaborn
 plotly
 flask
 Flask_Cors
+gunicorn
