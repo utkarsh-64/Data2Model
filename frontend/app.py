@@ -43,7 +43,7 @@ DATA = {}
 MODELS = {}
 SCALER = None
 
-@app.route('/upload-data', methods=['POST'])
+@app.route('/upload-data', methods=["GET",'POST'])
 def upload_data():
     file = request.files.get('file')
     if not file:
@@ -76,7 +76,7 @@ def upload_data():
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/eda', methods=['POST'])
+@app.route('/eda', methods=["GET",'POST'])
 def eda():
     df_key = session.get('df_key')
     if not df_key:
@@ -189,7 +189,7 @@ def eda_missing():
 
 
 
-@app.route('/clean-data', methods=['POST'])
+@app.route('/clean-data', methods=["GET",'POST'])
 def clean_data():
     import numpy as np
     df_key = session.get('df_key')
@@ -237,7 +237,7 @@ def clean_data():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/drop-columns', methods=['POST'])
+@app.route('/drop-columns', methods=["GET",'POST'])
 def drop_columns():
     df_key = session.get('df_key')
     if not df_key:
@@ -261,7 +261,7 @@ def drop_columns():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/replace-values', methods=['POST'])
+@app.route('/replace-values', methods=["GET",'POST'])
 def replace_values():
     df_key = session.get('df_key')
     if not df_key:
@@ -287,7 +287,7 @@ def replace_values():
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/create-feature', methods=['POST'])
+@app.route('/create-feature', methods=["GET",'POST'])
 def create_feature():
     df_key = session.get('df_key')
     if not df_key:
@@ -308,7 +308,7 @@ def create_feature():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/scale', methods=['POST'])
+@app.route('/scale', methods=["GET",'POST'])
 def scale():
     df_key = session.get('df_key')
     if not df_key:
@@ -341,7 +341,7 @@ def scale():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/encode', methods=['POST'])
+@app.route('/encode', methods=["GET",'POST'])
 def encode():
     df_key = session.get('df_key')
     if not df_key:
@@ -375,7 +375,7 @@ def encode():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/bin', methods=['POST'])
+@app.route('/bin', methods=["GET",'POST'])
 def bin_column():
     df_key = session.get('df_key')
     if not df_key:
@@ -431,7 +431,7 @@ def export_dataset():
         return jsonify({"error": str(e)}), 500
 
 
-@app.route("/feature-engineer", methods=["POST"])
+@app.route("/feature-engineer", methods=["GET","POST"])
 def feature_engineer():
     df = DATA.get('cleaned')
     if df is None:
@@ -442,7 +442,7 @@ def feature_engineer():
 
 
 
-@app.route('/train-model', methods=['POST'])
+@app.route('/train-model', methods=["GET",'POST'])
 def train_model():
     
     if 'df_key' not in session:
@@ -579,7 +579,7 @@ def download_model(zip_filename):
     return send_file(zip_path, as_attachment=True)
 
 
-@app.route("/evaluate", methods=["POST"])
+@app.route("/evaluate", methods=["GET","POST"])
 def evaluate():
     if 'model' not in request.files or 'test_data' not in request.files:
         return jsonify({'error': 'Model and test dataset files are required.'}), 400
