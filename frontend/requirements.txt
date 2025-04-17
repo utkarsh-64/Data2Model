@@ -1,0 +1,13 @@
+streamlit-option-menu
+streamlit==1.41.0
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.4.2
+imbalanced-learn==0.13.0
+sweetviz==2.3.1
+openpyxl==3.1.5
+matplotlib
+seaborn
+plotly
+flask
+Flask_Cors
