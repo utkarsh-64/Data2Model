@@ -640,5 +640,10 @@ def evaluate():
             'R2': round(r2, 4)
         }
         }), 200
+    
+@app.route("/",methods=["GET"])
+def work():
+    return "Backend Running Successfully"
+
 if __name__ == "__main__":
     app.run(debug=True)
