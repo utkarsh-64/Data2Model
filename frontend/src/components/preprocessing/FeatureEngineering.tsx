@@ -55,7 +55,7 @@ const FeatureEngineering: React.FC<FeatureEngineeringProps> = ({ onNext }) => {
   useEffect(() => {
     const fetchColumns = async () => {
       try {
-        const res = await fetch('http://localhost:5000/eda', {
+        const res = await fetch('https://data2model.onrender.com/eda', {
           method: 'POST',
           credentials: 'include'
         });
@@ -76,7 +76,7 @@ const FeatureEngineering: React.FC<FeatureEngineeringProps> = ({ onNext }) => {
 
   const handleCreateFeature = async () => {
     try {
-      const res = await fetch('http://localhost:5000/create-feature', {
+      const res = await fetch('https://data2model.onrender.com/create-feature', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -99,7 +99,7 @@ const FeatureEngineering: React.FC<FeatureEngineeringProps> = ({ onNext }) => {
 
   const handleApplyScaling = async () => {
     try {
-      const res = await fetch('http://localhost:5000/scale', {
+      const res = await fetch('https://data2model.onrender.com/scale', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -122,7 +122,7 @@ const FeatureEngineering: React.FC<FeatureEngineeringProps> = ({ onNext }) => {
 
   const handleEncoding = async () => {
     try {
-      const res = await fetch('http://localhost:5000/encode', {
+      const res = await fetch('https://data2model.onrender.com/encode', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -145,7 +145,7 @@ const FeatureEngineering: React.FC<FeatureEngineeringProps> = ({ onNext }) => {
 
   const handleBinning = async () => {
     try {
-      const res = await fetch('http://localhost:5000/bin', {
+      const res = await fetch('https://data2model.onrender.com/bin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

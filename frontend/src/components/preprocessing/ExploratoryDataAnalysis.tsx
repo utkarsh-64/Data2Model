@@ -29,7 +29,7 @@ const ExploratoryDataAnalysis = ({ onNext }: { onNext: () => void }) => {
   const [correlationURL, setCorrelationURL] = useState<string>('');
 
   useEffect(() => {
-    fetch("http://localhost:5000/eda", { method: "POST", credentials: "include" })
+    fetch("https://data2model.onrender.com/eda", { method: "POST", credentials: "include" })
       .then(res => res.json())
       .then(data => {
         if (data.error) throw new Error(data.error);
@@ -44,15 +44,15 @@ const ExploratoryDataAnalysis = ({ onNext }: { onNext: () => void }) => {
         });
       });
 
-    fetch("http://localhost:5000/eda/distribution", { method: "GET", credentials: "include" })
+    fetch("https://data2model.onrender.com/eda/distribution", { method: "GET", credentials: "include" })
       .then(res => res.blob())
       .then(blob => setPlotURL(URL.createObjectURL(blob)));
 
-    fetch("http://localhost:5000/eda/missing", { method: "GET", credentials: "include" })
+    fetch("https://data2model.onrender.com/eda/missing", { method: "GET", credentials: "include" })
       .then(res => res.blob())
       .then(blob => setMissingURL(URL.createObjectURL(blob)));
 
-    fetch("http://localhost:5000/eda/correlation", { method: "GET", credentials: "include" })
+    fetch("https://data2model.onrender.com/eda/correlation", { method: "GET", credentials: "include" })
       .then(res => res.blob())
       .then(blob => setCorrelationURL(URL.createObjectURL(blob)));
   }, []);

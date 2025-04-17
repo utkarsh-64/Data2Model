@@ -40,7 +40,7 @@ const UploadStep: React.FC<UploadStepProps> = ({ onDataLoaded }) => {
     formData.append('file', file);
 
     try {
-      const res = await fetch("http://localhost:5000/upload-data", {
+      const res = await fetch("https://data2model.onrender.com/upload-data", {
         method: "POST",
         body: formData,
         credentials: "include", // ✅ This enables session cookie
