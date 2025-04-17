@@ -28,6 +28,9 @@ const DataCleaning: React.FC<DataCleaningProps> = ({ onNext }) => {
       try {
         const res = await fetch('https://data2model.onrender.com/eda', {
           method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
           credentials: 'include',
         });
         const data = await res.json();
